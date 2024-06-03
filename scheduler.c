@@ -108,7 +108,7 @@ void FCFS(Process processes[], int process_count, int preemptive, int chart[]) {
                     process.io_interrupt_timing = -1;           // 2번 다시 실행 안되도록 만듦
 
                     id = process.pid - 1;
-                    processes[id].waiting_time -= processes[id].io_burst_time;
+                    processes[id].waiting_time -= (processes[id].io_burst_time + processes[id].cpu_burst_time - processes[id].remaining_time);
 
                     enqueue(waiting_queue, &waiting_count, process);
 
@@ -127,7 +127,7 @@ void FCFS(Process processes[], int process_count, int preemptive, int chart[]) {
             }
             if (process.remaining_time == 0) {
                 process.end_time = current_time;
-                process.waiting_time = process.end_time - process.arrival_time - process.cpu_burst_time;
+                process.waiting_time = process.start_time - process.arrival_time;
                 process.turnaround_time = process.end_time - process.arrival_time;
 
                 //printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n", process.pid, process.arrival_time, process.cpu_burst_time, process.start_time, process.end_time, process.waiting_time, process.turnaround_time);
@@ -173,7 +173,7 @@ void SJF(Process processes[], int process_count, int preemptive, int chart[]) {
                     process.io_interrupt_timing = -1;           // 2번 다시 실행 안되도록 만듦
 
                     id = process.pid - 1;
-                    processes[id].waiting_time -= processes[id].io_burst_time;
+                    processes[id].waiting_time -= (current_time - process.start_time + process.io_burst_time);
 
                     enqueue(waiting_queue, &waiting_count, process);
 
@@ -191,7 +191,7 @@ void SJF(Process processes[], int process_count, int preemptive, int chart[]) {
 
                         id = process.pid - 1;
                         //processes[id].waiting_time -= (current_time - process.start_time + process.io_burst_time);
-                        processes[id].waiting_time -= processes[id].io_burst_time;
+                        processes[id].waiting_time -= (processes[id].io_burst_time + processes[id].cpu_burst_time - processes[id].remaining_time);
 
                         enqueue(waiting_queue, &waiting_count, process);
                         
@@ -211,8 +211,12 @@ void SJF(Process processes[], int process_count, int preemptive, int chart[]) {
             
             if (process.remaining_time == 0) {
                 process.end_time = current_time;
-                process.waiting_time = process.end_time - process.arrival_time - process.cpu_burst_time;
+                process.waiting_time = process.start_time - process.arrival_time;
                 process.turnaround_time = process.end_time - process.arrival_time;
+
+                if(preemptive) {    // 158줄 process.start_time = current_time; 문제 해결용
+                    process.waiting_time = process.end_time - process.arrival_time - process.cpu_burst_time;
+                }
 
                 //printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n", process.pid, process.arrival_time, process.cpu_burst_time, process.start_time, process.end_time, process.waiting_time, process.turnaround_time);
                 id = process.pid - 1;
@@ -261,7 +265,7 @@ void Priority(Process processes[], int process_count, int preemptive, int chart[
                     process.io_interrupt_timing = -1;           // 2번 다시 실행 안되도록 만듦
 
                     id = process.pid - 1;
-                    processes[id].waiting_time -= processes[id].io_burst_time;
+                    processes[id].waiting_time -= (current_time - process.start_time + process.io_burst_time);
 
                     enqueue(waiting_queue, &waiting_count, process);
 
@@ -279,7 +283,7 @@ void Priority(Process processes[], int process_count, int preemptive, int chart[
 
                         id = process.pid - 1;
                         //processes[id].waiting_time -= (current_time - process.start_time + process.io_burst_time);
-                        processes[id].waiting_time -= processes[id].io_burst_time;
+                        processes[id].waiting_time -= (processes[id].io_burst_time + processes[id].cpu_burst_time - processes[id].remaining_time);
 
                         enqueue(waiting_queue, &waiting_count, process);
                         
@@ -299,8 +303,12 @@ void Priority(Process processes[], int process_count, int preemptive, int chart[
             
             if (process.remaining_time == 0) {
                 process.end_time = current_time;
-                process.waiting_time = process.end_time - process.arrival_time - process.cpu_burst_time;
+                process.waiting_time = process.start_time - process.arrival_time;
                 process.turnaround_time = process.end_time - process.arrival_time;
+
+                if(preemptive) {    // 158줄 process.start_time = current_time; 문제 해결용
+                    process.waiting_time = process.end_time - process.arrival_time - process.cpu_burst_time;
+                }
 
                 //printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\n", process.pid, process.arrival_time, process.cpu_burst_time, process.start_time, process.end_time, process.waiting_time, process.turnaround_time);
                 id = process.pid - 1;
