@@ -24,6 +24,7 @@ typedef struct {
 
 void Create_Process(Process processes[], int process_count);
 void Update_Process(Process *process, int elapsed_time);
+void Init_Process(Process processes[], int process_count);
 void Config();
 void Schedule(Process processes[], int process_count, int time_quantum);
 void FCFS(Process processes[], int process_count, int preemptive, int chart[]);
