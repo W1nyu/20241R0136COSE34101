@@ -41,3 +41,9 @@ void Update_Process(Process *process, int elapsed_time) {
         }
     }
 }
+
+void Init_Process(Process processes[], int process_count) {
+    for (int i = 0; i < process_count; i++) {
+        processes[i].waiting_time = 0;
+    }
+}
