@@ -7,40 +7,41 @@ void Config() {
 void Schedule(Process processes[], int process_count, int time_quantum) {
     int chart[MAX_CHART_LENGTH];
 
-    FCFS(processes, process_count, 0, chart);
-    Gantt_Chart(chart, MAX_CHART_LENGTH, "FCFS");
-    Evaluation(processes, process_count);
-    printf("\n\n");
-    /*
-
-    SJF(processes, process_count, 0, chart);
-    Gantt_Chart(chart, MAX_CHART_LENGTH, "Non-Preemptive SJF");
-    Evaluation(processes, process_count);
-    printf("\n\n");
-    
-    SJF(processes, process_count, 1, chart);
-    Gantt_Chart(chart, MAX_CHART_LENGTH, "Preemptive SJF");
-    Evaluation(processes, process_count);
-    printf("\n\n");
+    //FCFS(processes, process_count, 0, chart);
+    //Gantt_Chart(chart, MAX_CHART_LENGTH, "FCFS");
+    //Evaluation(processes, process_count);
+    //printf("\n\n");
     
 
-    Priority(processes, process_count, 0, chart);
-    Gantt_Chart(chart, MAX_CHART_LENGTH, "Non-Preemptive Priority");
-    Evaluation(processes, process_count);
-    printf("\n\n");
+    //SJF(processes, process_count, 0, chart);
+    //Gantt_Chart(chart, MAX_CHART_LENGTH, "Non-Preemptive SJF");
+    //Evaluation(processes, process_count);
+    //printf("\n\n");
+    
 
+    //SJF(processes, process_count, 1, chart);
+    //Gantt_Chart(chart, MAX_CHART_LENGTH, "Preemptive SJF");
+    //Evaluation(processes, process_count);
+    //printf("\n\n");
+    
 
-    Priority(processes, process_count, 1, chart);
-    Gantt_Chart(chart, MAX_CHART_LENGTH, "Preemptive Priority");
-    Evaluation(processes, process_count);
-    printf("\n\n");
+    //Priority(processes, process_count, 0, chart);
+    //Gantt_Chart(chart, MAX_CHART_LENGTH, "Non-Preemptive Priority");
+    //Evaluation(processes, process_count);
+    //printf("\n\n");
+
+    
+    //Priority(processes, process_count, 1, chart);
+    //Gantt_Chart(chart, MAX_CHART_LENGTH, "Preemptive Priority");
+    //Evaluation(processes, process_count);
+    //printf("\n\n");
 
 
     RR(processes, process_count, time_quantum, chart);
     Gantt_Chart(chart, MAX_CHART_LENGTH, "Round Robin");
     Evaluation(processes, process_count);
     printf("\n\n");
-    */
+
 }
 
 int main() {
